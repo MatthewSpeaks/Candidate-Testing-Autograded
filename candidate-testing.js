@@ -30,26 +30,40 @@ function askQuestion() {
   const questionsAsked = require('readline-sync');
   
   for (let i = 0; i < questions.length; i++) {
-    candidateAnswers[i] = questionsAsked.question(questions[i]);
+    candidateAnswers.push(questionsAsked.question(questions[i]));
   }
+  return candidateAnswers;
 }
 
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  if (candidateAnswer === correctAnswer) {
-    console.log("That's correct!");
+  let grade = 0;
+  let totalscore = 5;
+
+  for (let i = 0; i < candidateAnswers.length; i++) {
+  
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+     console.log(`Candidate scored the correct answer on question ${i + 1}`);
+     grade ++;
+    } else {
+     console.log (`Candidate scored wrong answer on question ${i + 1}`);
+    }
+ }
+  //TODO 3.2 use this variable to calculate the candidates score.
+  grade = (grade / totalscore) * 100;
+  let passingScore = "You must score 80% or better to pass!";
+
+  if (grade >= 80) {
+    console.log(passingScore + `\n Congratulations, you scored ${grade}%!`);
   } else {
-    console.log("Sorry, wrong answer!");
+    console.log(passingScore + `\n Sorry, you scolred ${grade}%!`);
   }
-
-
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
-
+  
   return grade;
 }
+
 
 function runProgram() {
   askForName();
@@ -59,7 +73,6 @@ function runProgram() {
   gradeQuiz(this.candidateAnswers);
 }
 
-runProgram();
 
 // ----------- Don't write any code or change any code below this line ---------- //
 module.exports = {
