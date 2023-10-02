@@ -45,31 +45,38 @@ function gradeQuiz(candidateAnswers) {
   for (let i = 0; i < candidateAnswers.length; i++) {
   
     if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
-     console.log(`Candidate scored the correct answer on question ${i + 1}`);
      grade ++;
-    } else {
-     console.log (`Candidate scored wrong answer on question ${i + 1}`);
     }
  }
   //TODO 3.2 use this variable to calculate the candidates score.
-  grade = (grade / totalscore) * 100;
-  let passingScore = "You must score 80% or better to pass!";
-
+  let percentage = (grade / totalscore) * 100;
+  console.log(`>>> Overall Grade: ${percentage} (${grade} of ${totalscore} responses correct) <<<`)
   if (grade >= 80) {
-    console.log(passingScore + `\n Congratulations, you scored ${grade}%!`);
+    console.log(`>>> Status: PASSED <<<`);
   } else {
-    console.log(passingScore + `\n Sorry, you scolred ${grade}%!`);
+    console.log(`>>> Status: FAILED <<<`);
   }
   
   return grade;
 }
 
+function printCandidateQA (quizQuestions, answers, candAnswers) {
+  for (let i = 0; i < quizQuestions.length; i++) {
+    console.log(`${(i +1)}) ${quizQuestions[i]}
+    Your Answer: ${candAnswers[i]}
+    Correct Answer: ${answers[i]} \n `)
+  };
+  return;
+};
+
 
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Hello, %s", candidateName);
   askQuestion();
+  console.log('\n');
+  console.log(`Candidate Name: ${candidateName}`);
+  printCandidateQA(questions, correctAnswers, candidateAnswers);
   gradeQuiz(this.candidateAnswers);
 }
 
