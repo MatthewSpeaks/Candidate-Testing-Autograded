@@ -51,13 +51,13 @@ function gradeQuiz(candidateAnswers) {
   //TODO 3.2 use this variable to calculate the candidates score.
   let percentage = (grade / totalscore) * 100;
   console.log(`>>> Overall Grade: ${percentage} (${grade} of ${totalscore} responses correct) <<<`)
-  if (grade >= 80) {
+  if (percentage >= 80) {
     console.log(`>>> Status: PASSED <<<`);
   } else {
     console.log(`>>> Status: FAILED <<<`);
   }
   
-  return grade;
+  return percentage;
 }
 
 function printCandidateQA (quizQuestions, answers, candAnswers) {
